@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "967768444780",
+    "project_id": "bar-gpt",
+    "storage_bucket": "bar-gpt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967768444780:android:f473dde14ec29f7e5bed49",
+        "android_client_info": {
+          "package_name": "com.lawi.bar_gpt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967768444780-q6lho6r2ts8b3s8ingvvindeav1v0rdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy0eziaH19ezdeUcpxf-btF142NxT4QVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967768444780-q6lho6r2ts8b3s8ingvvindeav1v0rdo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "967768444780-c7esb6j7ipqgvg4c7bdql2isv0lh5e1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.barGpt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
