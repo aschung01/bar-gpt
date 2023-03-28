@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:bar_gpt/core/models/answer.dart';
@@ -68,50 +69,71 @@ class ChatController extends GetxController {
     );
   }
 
-  void handleSendPressed() {
+  void handleSendPressed() async {
     if (inputController.text.isNotEmpty && !isChatCompletionLoading.value) {
       addMessage(inputController.text);
       inputController.clear();
-      chatCompletionStream =
-          OpenAIService.getChatCompletionStream(chatCompletionMessageList);
       if (!isChatCompletionLoading.value) {
         isChatCompletionLoading.value = true;
-        messageList.add(
-          Message(role: Role.assistant, content: ""),
-        );
-      }
-
-      chatCompletionStream!.listen(
-        (event) {
-          SupabaseService.logger.i(event);
-          chatCompletionMessage.value +=
-              event.choices.first.delta.content ?? "";
-          update();
-        },
-        onDone: () {
-          chatCompletionMessageList.add(
-            OpenAIChatCompletionChoiceMessageModel(
-              role: "assistant",
-              content: chatCompletionMessage.value,
-            ),
+        if (!GetPlatform.isWeb) {
+          messageList.add(
+            Message(role: Role.assistant, content: ""),
           );
-          messageList.setAll(
-            messageList.length - 1,
-            [
-              Message(
-                role: Role.assistant,
+        }
+      }
+      if (GetPlatform.isWeb) {
+        final answer =
+            await OpenAIService.getChatCompletion(chatCompletionMessageList);
+        chatCompletionMessageList.add(
+          OpenAIChatCompletionChoiceMessageModel(
+            role: "assistant",
+            content: answer.choices.first.message.content,
+          ),
+        );
+        messageList.add(
+          Message(
+            role: Role.assistant,
+            content: answer.choices.first.message.content,
+          ),
+        );
+        isChatCompletionLoading.value = false;
+        update();
+      } else {
+        chatCompletionStream =
+            OpenAIService.getChatCompletionStream(chatCompletionMessageList)
+                .cast();
+        chatCompletionStream!.listen(
+          (event) {
+            SupabaseService.logger.i(event);
+            chatCompletionMessage.value +=
+                event.choices.first.delta.content ?? "";
+            update();
+          },
+          onDone: () {
+            chatCompletionMessageList.add(
+              OpenAIChatCompletionChoiceMessageModel(
+                role: "assistant",
                 content: chatCompletionMessage.value,
               ),
-            ],
-          );
-          chatCompletionMessage.value = "";
-          isChatCompletionLoading.value = false;
-        },
-        onError: (error) {
-          print(error);
-          SupabaseService.logger.e(error);
-        },
-      );
+            );
+            messageList.setAll(
+              messageList.length - 1,
+              [
+                Message(
+                  role: Role.assistant,
+                  content: chatCompletionMessage.value,
+                ),
+              ],
+            );
+            chatCompletionMessage.value = "";
+            isChatCompletionLoading.value = false;
+          },
+          onError: (error) {
+            print(error);
+            SupabaseService.logger.e(error);
+          },
+        );
+      }
     }
   }
 }

@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "bar-gpt",
+    "dev": "bar-gpt"
+  },
+  "targets": {}
+}

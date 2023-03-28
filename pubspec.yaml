@@ -48,6 +48,7 @@ dependencies:
   cached_network_image: ^3.2.3
   phosphor_flutter: ^1.4.0
   bubble: ^1.2.1
+  dio: ^5.0.3
 
 dev_dependencies:
   flutter_test:
