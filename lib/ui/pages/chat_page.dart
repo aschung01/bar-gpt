@@ -212,6 +212,7 @@ class ChatPage extends GetView<ChatController> {
         padding: const EdgeInsets.all(12),
         child: GetX<ChatController>(builder: (_) {
           return TextField(
+            autofocus: true,
             controller: ChatController.to.inputController,
             onTapOutside: (event) {
               FocusScope.of(context).unfocus();

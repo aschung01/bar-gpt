@@ -70,7 +70,7 @@ class ExamListItem extends StatelessWidget {
             FittedBox(
               fit: BoxFit.scaleDown,
               child: FontManager.kText(
-                Typo.h3,
+                Typo.h4,
                 "${exam.year}년도 시행 제${exam.num}회 변호사시험",
               ),
             ),
@@ -82,7 +82,7 @@ class ExamListItem extends StatelessWidget {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: FontManager.kText(
-                        Typo.h4,
+                        Typo.h5,
                         exam.category,
                       ),
                     ),
@@ -93,7 +93,7 @@ class ExamListItem extends StatelessWidget {
                     ),
                     FittedBox(
                       fit: BoxFit.scaleDown,
-                      child: FontManager.kText(Typo.h4, exam.type),
+                      child: FontManager.kText(Typo.h5, exam.type),
                     ),
                   ],
                 ),

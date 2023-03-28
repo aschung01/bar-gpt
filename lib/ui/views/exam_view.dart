@@ -49,7 +49,7 @@ class ExamView extends GetView<ExamController> {
         backgroundColor: ColorManager.gray1,
         foregroundColor: ColorManager.gray9,
         title: FontManager.kText(
-          Typo.h3,
+          Typo.h4,
           "${controller.currentExam?.year}년도 시행 제${controller.currentExam?.num}회 변호사시험",
         ),
       ),
